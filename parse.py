@@ -113,6 +113,7 @@ def main() -> None:
             continue
         channel = Buttons(int(line[4:6]))
 
+        # initialize the current measure
         for ch in Buttons:
             linesGroupedByMeasure[currMeasure][ch] = {
                 "data": "", "length": 0, "div2": 0} if ch not in linesGroupedByMeasure[currMeasure] else linesGroupedByMeasure[currMeasure][ch]
@@ -146,6 +147,18 @@ def main() -> None:
         00--------------02-------------- (len:4, div2: 2 -> 14 padding)
         """
 
+        """
+        TODO: I need to make maxGrid=1 measure to have 4 beats?
+        4 beats per measure if 4/4
+        maxGrid = 1
+            : 1 grid * 4 beats
+        maxGrid = 16
+            : 4 grid * 4 beats
+        maxGrid = 24
+            : 6 grid * 4 beats
+        maxGrid = 8
+            : 2 grid * 4 beats
+        """
         for channel in curr:
             if channel == "maxGrid" or curr[channel]["div2"] == maxGrid or curr[channel]["length"] == 0:
                 continue
